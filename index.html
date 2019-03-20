@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>8y's Countdown</title>
+    <link rel="shortcut icon" href="/images/count!.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body style="background-color:rgb(70, 105, 136);" onload="startCountdown()">
+    <div class="text-center judul">
+        
+        
+    </div>
+
+    <!-- <div class="container">
+        
+        
+        <button id="req-sync">Sync in background</button>
+        
+
+    </div> -->
+
+    <div class="container">
+        <h2 id="connection-status">Hallo, selamat datang untuk countdown <b> 8 tahun kedepan </b> :)</h2>
+        <br>
+        <p align="center"><img src="/images/icons/icon-384x384.png" alt="" ></p>
+        <hr>
+        <form>
+            <fieldset id="countdown-start">
+                <h3>Countdown Target : </h3>
+                <hr>
+                <span>
+                    <input id="year" type="number" min="-9999" max="9999" step="1" value="2026" size="1" placeholder="year">
+                    <label for="month">-</label>
+                    <input id="month" type="number" min="1" max="12" step="1" value="12" size="1" placeholder="month">
+                    <label for="date">-</label>
+                    <input id="date" type="number" min="1" max="31" step="1" value="31" size="1" placeholder="day">
+                </span>
+
+                <span>
+                    <label for="hours">&nbsp;</label>
+                    <input id="hours" type="number" min="0" max="23" step="1" value="23" size="1" placeholder="hrs">
+                    <label for="minutes">:</label>
+                    <input id="minutes" type="number" min="0" max="60" step="1" value="59" size="1" placeholder="min">
+                    <label for="minutes">:</label>
+                    <input id="seconds" type="number" min="0" max="60" step="1" value="59" size="1" placeholder="sec">
+                </span>
+                <label for="hours">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</label>
+                <button id="btn-notification">Pengen Jajan ? Klik Disini</button>
+
+                <!-- <input type="button" id="start" value="Start timer" onClick="startCountdown()"/>
+                <input type="button" id="end" value="End timer" onClick="endCountdown()"/> -->
+                <!-- <label for="note">Note:</label><input type="text" id="note" value="The countdown ended."/> -->
+
+            </fieldset>
+        </form>
+
+        <hr>
+        <h4>Days, Hours, Minutes, and Seconds until Countdown reached : </h4>
+        <hr>
+        <h1 id="clock-placeholder"></h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr>
+        
+
+        
+        <script type="text/javascript" src="/js/countdown.js"></script>
+
+        <script>
+
+                var clockRunning = false;
+                var clockPlaceholder = document.getElementById("clock-placeholder");
+                var targetDate;
+                var clock;
+
+                function updateClock() {
+                  var cd = countdown(targetDate, null, countdown.DAYS|countdown.HOURS|countdown.MINUTES|countdown.SECONDS, 4);
+                  clockPlaceholder.innerHTML = cd.toString();
+                  if (targetDate.getTime() < (new Date()).getTime()) {
+                    alert(document.getElementById("note").value);
+                    endCountdown();
+                  }
+                }
+
+                function startCountdown() {
+                  if ( clockRunning == false ) {
+                    var d = parseInt(document.getElementById("date").value) || 0;
+                    var h = parseInt(document.getElementById("hours").value) || 0;
+	                var m = parseInt(document.getElementById("minutes").value) || 0;
+	                var s = parseInt(document.getElementById("seconds").value) || 0;
+                    if (h == 0 && m == 0 && s == 0 ) {
+                      return;
+                    }
+                    // setup target Date object
+                    var now = new Date(); // console.debug(now.toString());
+                    targetDate = new Date(2026, 12, 31,
+                                          23 + h, 59 + m, 59 + s, 0);
+                    // start clock
+                    clock = setInterval(updateClock, 1000);
+                    clockRunning = true;
+                  }
+                }
+                function endCountdown() {
+                  clockPlaceholder.innerHTML = ""
+                  clearInterval( clock );
+                  clockRunning = false;
+                }
+              </script>
+        
+        <p align="center">Count! v1</p>
+        <p align="center">
+                Made w/ Brain by Hz </p>
+    </div>
+
+   
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/main.js"></script>
+    
+</body>
+</html>
